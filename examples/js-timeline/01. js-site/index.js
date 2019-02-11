@@ -1,103 +1,103 @@
-// const displayBeers = function () {
-//     // const beerData = {
-//     //   imageUrl: 'https://static1.squarespace.com/static/57ed18381b631b4217bef4b9/t/5ae8cd3103ce64d2ab537013/1525206334290/website.jpg',
+// const displaycoffees = function () {
+//     // const coffeeData = {
+//     //   imageUrl: 'https://www.coffeebeanery.com/img/product/Amaretto.jpg?fv=D1D76216307E1063DAC9F99ED5849BC2-11643',
 //     //   name: 'Santilla',
 //     //   abv: '6.0%',
-//     //   review: 'This beer tastes like Pine, Orange Zest, Crisp.  I thought it was delicious.'
+//     //   review: 'This coffee tastes like Pine, Orange Zest, Crisp.  I thought it was delicious.'
 //     // }
 //
-//     // const beerProfileInnerHTML =
-//     //     '<img src="https://static1.squarespace.com/static/57ed18381b631b4217bef4b9/t/5ae8cd3103ce64d2ab537013/1525206334290/website.jpg" alt="">' +
+//     // const coffeeProfileInnerHTML =
+//     //     '<img src="https://www.coffeebeanery.com/img/product/Amaretto.jpg?fv=D1D76216307E1063DAC9F99ED5849BC2-11643" alt="">' +
 //     //     '<h3>Santilla</h3>' +
 //     //     '<p>6.0%</p>' +
-//     //     '<p>This beer tastes like Pine, Orange Zest, Crisp.  I thought it was delicious.</p>'
+//     //     '<p>This coffee tastes like Pine, Orange Zest, Crisp.  I thought it was delicious.</p>'
 //
-//     // const beerProfileInnerHTML =
-//     //     '<img src="' + beerData.imageUrl + '" alt="">' +
-//     //     '<h3>' + beerData.name + '</h3>' +
-//     //     '<p>' + beerData.abv + '</p>' +
-//     //     '<p>' + beerData.review + '</p>'
+//     // const coffeeProfileInnerHTML =
+//     //     '<img src="' + coffeeData.imageUrl + '" alt="">' +
+//     //     '<h3>' + coffeeData.name + '</h3>' +
+//     //     '<p>' + coffeeData.abv + '</p>' +
+//     //     '<p>' + coffeeData.review + '</p>'
 //     //
 //     // for (let i = 0; i < 6; i++) {
-//     //   const beerProfileHTML = document.createElement('div')
-//     //   beerProfileHTML.className = 'beer-profile'
-//     //   beerProfileHTML.innerHTML = beerProfileInnerHTML
-//     //   document.querySelector('#beer-profiles-container').append(beerProfileHTML)
+//     //   const coffeeProfileHTML = document.createElement('div')
+//     //   coffeeProfileHTML.className = 'coffee-profile'
+//     //   coffeeProfileHTML.innerHTML = coffeeProfileInnerHTML
+//     //   document.querySelector('#coffee-profiles-container').append(coffeeProfileHTML)
 //     // }
 // }
 
-const displayReview = function (beerData) {
-  const beerProfileInnerHTML =
-    '<img src="' + beerData.imageUrl + '" alt="">' +
-    '<h3>' + beerData.name + '</h3>' +
-    '<p>' + beerData.abv + '</p>' +
-    '<p>' + beerData.review + '</p>'
+const displayReview = function (coffeeData) {
+  const coffeeProfileInnerHTML =
+    '<img src="' + coffeeData.imageUrl + '" alt="">' +
+    '<h3>' + coffeeData.name + '</h3>' +
+    '<p>' + coffeeData.abv + '</p>' +
+    '<p>' + coffeeData.review + '</p>'
 
-  const beerProfileHTML = document.createElement('div')
-  beerProfileHTML.className = 'beer-profile'
-  beerProfileHTML.innerHTML = beerProfileInnerHTML
-  document.querySelector('#beer-profiles-container').append(beerProfileHTML)
+  const coffeeProfileHTML = document.createElement('div')
+  coffeeProfileHTML.className = 'coffee-profile'
+  coffeeProfileHTML.innerHTML = coffeeProfileInnerHTML
+  document.querySelector('#coffee-profiles-container').append(coffeeProfileHTML)
 }
 
-const saveReview = function (newBeer) {
-  // Save beers
-  if (window.localStorage.getItem('beers')) {
-    const beers = JSON.parse(window.localStorage.getItem('beers'))
-    beers.push(newBeer)
-    localStorage.setItem('beers', JSON.stringify(beers))
+const saveReview = function (newcoffee) {
+  // Save coffees
+  if (window.localStorage.getItem('coffees')) {
+    const coffees = JSON.parse(window.localStorage.getItem('coffees'))
+    coffees.push(newcoffee)
+    localStorage.setItem('coffees', JSON.stringify(coffees))
 
-  // Save first beer
+  // Save first coffee
   } else {
-    const beers = [newBeer]
-    localStorage.setItem('beers', JSON.stringify(beers))
+    const coffees = [newcoffee]
+    localStorage.setItem('coffees', JSON.stringify(coffees))
   }
 }
 
-const reviewBeer = function (event) {
+const reviewcoffee = function (event) {
   event.preventDefault()
 
-  // get inputs from user to create beer object
-  const formInputs = document.querySelectorAll('#beer-review-form input')
-  const formTextArea = document.querySelectorAll('#beer-review-form textarea')
-  const newBeer = {
+  // get inputs from user to create coffee object
+  const formInputs = document.querySelectorAll('#coffee-review-form input')
+  const formTextArea = document.querySelectorAll('#coffee-review-form textarea')
+  const newcoffee = {
     name: formInputs[0].value,
     abv: formInputs[1].value,
     imageUrl: formInputs[2].value,
     review: formTextArea[0].value
   }
 
-  // save beer
-  saveReview(newBeer)
+  // save coffee
+  saveReview(newcoffee)
 
-  // display beer
-  displayReview(newBeer)
+  // display coffee
+  displayReview(newcoffee)
 
   // reset form
   event.target.reset()
 }
 
 const displayReviews = function () {
-  // Display beers from local storage
-  const beersString = window.localStorage.getItem('beers')
-  if (beersString) {
-    const beers = JSON.parse(beersString)
-    beers.forEach(function(beer){
-      displayReview(beer)
+  // Display coffees from local storage
+  const coffeesString = window.localStorage.getItem('coffees')
+  if (coffeesString) {
+    const coffees = JSON.parse(coffeesString)
+    coffees.forEach(function(coffee){
+      displayReview(coffee)
     })
   }
 }
 
 const deleteReviews = function () {
-  localStorage.setItem('beers', '')
-  document.querySelector('#beer-profiles-container').innerHTML = ''
+  localStorage.setItem('coffees', '')
+  document.querySelector('#coffee-profiles-container').innerHTML = ''
 }
 
 window.onload = function () {
 
-  // display beers
+  // display coffees
   displayReviews()
 
   // set up form
-  document.querySelector('#beer-review-form').onsubmit = reviewBeer
+  document.querySelector('#coffee-review-form').onsubmit = reviewcoffee
   document.querySelector('#clear-reviews').onclick = deleteReviews
 }

@@ -1,74 +1,74 @@
-const displayReview = function (beerData) {
-  const beerProfileHTML =
-    '<div class="beer-profile">' +
-      '<img src="' + beerData.imageUrl + '" alt="">' +
-      '<h3>' + beerData.name + '</h3>' +
-      '<p>' + beerData.abv + '</p>' +
-      '<p>' + beerData.review + '</p>' +
+const displayReview = function (coffeeData) {
+  const coffeeProfileHTML =
+    '<div class="coffee-profile">' +
+      '<img src="' + coffeeData.imageUrl + '" alt="">' +
+      '<h3>' + coffeeData.name + '</h3>' +
+      '<p>' + coffeeData.abv + '</p>' +
+      '<p>' + coffeeData.review + '</p>' +
     '</div>'
 
-  $('#beer-profiles-container').append(beerProfileHTML)
+  $('#coffee-profiles-container').append(coffeeProfileHTML)
 }
 
-const saveReview = function (newBeer) {
-  // Save beers
-  if (window.localStorage.getItem('beers')) {
-    const beers = JSON.parse(window.localStorage.getItem('beers'))
-    beers.push(newBeer)
-    localStorage.setItem('beers', JSON.stringify(beers))
+const saveReview = function (newcoffee) {
+  // Save coffees
+  if (window.localStorage.getItem('coffees')) {
+    const coffees = JSON.parse(window.localStorage.getItem('coffees'))
+    coffees.push(newcoffee)
+    localStorage.setItem('coffees', JSON.stringify(coffees))
 
-  // Save first beer
+  // Save first coffee
   } else {
-    const beers = [newBeer]
-    localStorage.setItem('beers', JSON.stringify(beers))
+    const coffees = [newcoffee]
+    localStorage.setItem('coffees', JSON.stringify(coffees))
   }
 }
 
-const reviewBeer = function (event) {
+const reviewcoffee = function (event) {
   event.preventDefault()
 
-  // get inputs from user to create beer object
-  const formInputs = $('#beer-review-form input')
-  const formTextArea = $('#beer-review-form textarea')
-  const newBeer = {
+  // get inputs from user to create coffee object
+  const formInputs = $('#coffee-review-form input')
+  const formTextArea = $('#coffee-review-form textarea')
+  const newcoffee = {
     name: $(formInputs[0]).val(),
     abv: $(formInputs[1]).val(),
     imageUrl: $(formInputs[2]).val(),
     review: $(formTextArea[0]).val()
   }
 
-  // save beer
-  saveReview(newBeer)
+  // save coffee
+  saveReview(newcoffee)
 
-  // display beer
-  displayReview(newBeer)
+  // display coffee
+  displayReview(newcoffee)
 
   // reset form
   $(event.target)[0].reset()
 }
 
 const displayReviews = function () {
-  // Display beers from local storage
-  const beersString = window.localStorage.getItem('beers')
-  if (beersString) {
-    const beers = JSON.parse(beersString)
-    beers.forEach(function(beer){
-      displayReview(beer)
+  // Display coffees from local storage
+  const coffeesString = window.localStorage.getItem('coffees')
+  if (coffeesString) {
+    const coffees = JSON.parse(coffeesString)
+    coffees.forEach(function(coffee){
+      displayReview(coffee)
     })
   }
 }
 
 const deleteReviews = function () {
-  localStorage.setItem('beers', '')
-  $('#beer-profiles-container').html('')
+  localStorage.setItem('coffees', '')
+  $('#coffee-profiles-container').html('')
 }
 
 $(function () {
 
-  // display beers
+  // display coffees
   displayReviews()
 
   // set up form
-  $('#beer-review-form').on('submit', reviewBeer)
+  $('#coffee-review-form').on('submit', reviewcoffee)
   $('#clear-reviews').on('click', deleteReviews)
 })
